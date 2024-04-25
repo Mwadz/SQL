@@ -1,0 +1,11 @@
+--B.
+-- 1. Mortality Rate Trend: Retrieve the trend of COVID-19 mortality rate (deaths divided by total cases) over the past month, grouped by date.
+-- 2. Hotspot Identification: Identify the top 10 countries with the highest average daily increase in COVID-19 cases over the past week.
+-- 3. Recovery Time: Calculate the median number of days it takes for COVID-19 patients to recover, grouped by age group.
+-- 4. Variants Analysis: Determine the percentage of COVID-19 cases caused by different variants (e.g., Delta, Omicron) in each country.
+-- 5. Vaccination Impact: Compare the COVID-19 case fatality rate (deaths divided by total cases) between vaccinated and unvaccinated individuals, controlling for age group and comorbidities.
+-- 6. Testing Efficiency: Assess the efficiency of COVID-19 testing by calculating the average turnaround time (time between test request and result availability) for each testing facility, grouped by country.
+-- 7. Regional Disparities: Identify regions within countries that have significantly higher or lower COVID-19 transmission rates compared to the national average.
+-- 8. Epidemic Modeling: Develop a predictive model to forecast the number of COVID-19 cases in the next month for each country, taking into account factors such as population density, vaccination rate, and government interventions.
+-- 9. Impact of Public Health Measures: Analyze the effectiveness of public health measures (e.g., mask mandates, lockdowns) in reducing COVID-19 transmission by comparing infection rates before and after their implementation.
+-- 10. Long-Term Effects: Investigate the long-term health effects of COVID-19 by analyzing hospitalization rates and mortality rates among recovered patients, stratified by age group and pre-existing conditions.
