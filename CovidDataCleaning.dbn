@@ -1,0 +1,107 @@
+{
+ "cells": [
+  {
+   "kind": 1,
+   "language": "markdown",
+   "value": "# 1. Normalizing date format",
+   "metadata": {}
+  },
+  {
+   "kind": 2,
+   "language": "sql",
+   "value": "\r\n/*checking the current dt*/\r\nSELECT DATA_TYPE FROM INFORMATION_SCHEMA.COLUMNS \r\nWHERE table_name = 'nashvillehousing' AND COLUMN_NAME = 'SaleDate';",
+   "metadata": {
+    "connectionName": "MySQL"
+   }
+  },
+  {
+   "kind": 2,
+   "language": "sql",
+   "value": "/* converting the date format */\r\n-- UPDATE project1.nashvillehousing\r\n-- SET SaleDate = DATE_FORMAT(STR_TO_DATE(SaleDate, '%M %d, %Y'), '%d/%m/%Y');",
+   "metadata": {
+    "connectionName": "MySQL"
+   }
+  },
+  {
+   "kind": 2,
+   "language": "sql",
+   "value": "/* confirming format change */\r\nSELECT* from project1.nashvillehousing;",
+   "metadata": {
+    "connectionName": "MySQL"
+   }
+  },
+  {
+   "kind": 2,
+   "language": "sql",
+   "value": "/*Converting datatypes*/\r\n-- UPDATE project1.nashvillehousing\r\n-- SET SaleDate = STR_TO_DATE(SaleDate, '%d/%m/%Y');",
+   "metadata": {
+    "connectionName": "MySQL"
+   }
+  },
+  {
+   "kind": 2,
+   "language": "sql",
+   "value": "/* CONFIRMING DATE DATATYPE*/\r\nSELECT DATA_TYPE FROM INFORMATION_SCHEMA.COLUMNS \r\nWHERE table_name = 'nashvillehousing' AND COLUMN_NAME = 'SaleDate';",
+   "metadata": {
+    "connectionName": "MySQL"
+   }
+  },
+  {
+   "kind": 1,
+   "language": "markdown",
+   "value": "The <font color=\"orange\">data type</font> is still showing up as text but the <font color=\"green\">format</font> has been successfully changed. I don't know why that's the case bt we'll inevitably find out later when we use date to analyse the data.",
+   "metadata": {}
+  },
+  {
+   "kind": 1,
+   "language": "markdown",
+   "value": "# 2. Populating Property Address Data",
+   "metadata": {}
+  },
+  {
+   "kind": 2,
+   "language": "sql",
+   "value": "/* observig the current property address format */\r\nSELECT ParcelID, PropertyAddress \r\nFROM project1.nashvillehousing\r\nWHERE PropertyAddress  is not null\r\nORDER BY ParcelID;",
+   "metadata": {
+    "connectionName": "MySQL"
+   }
+  },
+  {
+   "kind": 1,
+   "language": "markdown",
+   "value": "This is so there are no nulls in the identifying data features. That is Parcel ID and Property Address. Data above was checked to confirm that the property adress and Parcel ID were unique and consistently the same. ie If data has Pacrel ID as 1 and property address as 20, all the data with parcel ID 1 have the address as 20. The vice versa is true as well. We are now going to populate the null values using the discovered principle.",
+   "metadata": {}
+  },
+  {
+   "kind": 2,
+   "language": "sql",
+   "value": "SELECT \r\n    a.ParcelID AS ParcelID_A, \r\n    a.PropertyAddress AS PropertyAddress_A, \r\n    b.ParcelID AS ParcelID_B, \r\n    b.PropertyAddress AS PropertyAddress_B, \r\n    IFNULL(a.PropertyAddress, b.PropertyAddress) AS ResultingAddress\r\nFROM \r\n    project1.nashvillehousing a\r\nJOIN \r\n    project1.nashvillehousing b\r\n    ON a.ParcelID = b.ParcelID\r\n    AND a.`UniqueID` <> b.`UniqueID`\r\nWHERE \r\n    a.PropertyAddress IS NULL;\r\n",
+   "metadata": {
+    "connectionName": "MySQL"
+   }
+  },
+  {
+   "kind": 2,
+   "language": "sql",
+   "value": "UPDATE project1.nashvillehousing a\r\nJOIN project1.nashvillehousing b\r\n    ON a.ParcelID = b.ParcelID\r\n    AND a.`UniqueID` <> b.`UniqueID`\r\nSET a.PropertyAddress = IFNULL(a.PropertyAddress, b.PropertyAddress)\r\nWHERE a.PropertyAddress IS NULL;",
+   "metadata": {
+    "connectionName": "MySQL"
+   }
+  },
+  {
+   "kind": 1,
+   "language": "markdown",
+   "value": "# Breaking out Address into Individual Columns (Address, City, State)",
+   "metadata": {}
+  },
+  {
+   "kind": 2,
+   "language": "sql",
+   "value": "Select PropertyAddress\r\nFrom project1.nashvillehousing",
+   "metadata": {
+    "connectionName": "MySQL"
+   }
+  }
+ ],
+ "metadata": {}
+}
